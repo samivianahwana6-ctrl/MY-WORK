@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("backlogg.jpg");
+            font-family: Arial, sans-serif;
+        }
+        form{
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 30px  25px;
+            background: #fff;
+            border-radius: 6px;
+            gap: 20px;
+        }
+        legend{
+            font-size: 18px;
+            font-weight: bold;
+        }
+        legend span{
+            padding-bottom: 1px;
+            border-bottom: 3px solid rgb(48, 78, 248);
+        }
+        input{
+            padding: 8px 16px;
+            border: 1px outset rgb(188, 188, 252);
+            border-radius: 4px;
+            color: rgb(27, 27, 27);
+            outline: none;
+        }
+        label{
+            color: rgb(188, 188, 252);
+            font-size: 14px;
+        }
+        input[type="submit"]{
+            background: rgb(107, 121, 252);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:disabled{
+            background-color: rgb(179,179,255);
+            cursor: not-allowed;
+        }
+        p{
+            text-align: center;
+        }
+        p a{
+            text-decoration: none;
+            margin-left: 2px;
+            columns: rgb(107,121,252);
+        }
+        .error{
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="#">
+        <legend>login</legend>
+
+        <!--email-->
+        <div class="error"></div>
+        <input type="email"name="email" placeholder="Enter your email" id="email">
+        <!--password-->
+        <div class="error"></div>
+            <input type="password"placeholder="create password" id="password">
+        
+        <!--submit buttom-->
+        <input type="submit" value="Register Now" id="register"  >
+        <!--login link-->
+        <P>Don't have an account? <a href="homework.html">Signup Now</a></P>
+        </form>
+
+        <script>
+            function login(id) {
+               return document.getElementById(id);
+            }
+            let email = login("email");
+            let password = login("password");
+            let register = login("register")
+            let log = false
+            register.addEventListener("click",function(e){
+                // getting the error divs in an array
+                let error =document.querySelectorAll(".error");
+
+            // email validate
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.value == "") {
+                 error[0].innerHTML= "Email is Required";
+                 e.preventDefault();
+            }else if(!email.value.match(emailRegex)){
+                error[0].innerHTML = "Email is invalid";
+                log = false
+                e.preventDefault();
+            }else{
+                error[0].innerHTML = "";
+            }
+            // password validation
+            let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+            if (password.value == "") {
+                error[1].innerHTML = "password is Required";
+                e.preventDefault();
+            }else if(!password.value.match(passwordRegex)){
+                error[1].innerHTML = "Password must be 6-20 charaters long,contain at least one uppercase letter,one lower case letter,and one number ";
+                e.preventDefault();
+            }else{
+                error[1].innerHTML ="";
+            }
+                
+            })
+
+        </script>
+</body>
+</html>
